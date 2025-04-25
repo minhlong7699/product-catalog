@@ -20,17 +20,122 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+# 🛍️ Product Catalog Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This documentation covers the main functionalities of the product catalog, including browsing products, viewing product details, and managing products in the admin dashboard.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📦 Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ View all available products  
+- 🔍 View product details  
+- 🛠 Admin interface to edit products  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🗂 Product Listing
+
+### 📍 Route
+```bash
+/collection
+```
+
+### 📝 Description
+Displays a list of all active products (`isActive: true`) available in the catalog. Users can browse, filter, and sort products by categories or custom criteria.
+
+### 💡 Notes
+- Products with `isActive: false` are not shown.
+- Each product displays:
+  - Title
+  - Price / Sale Price (if available)
+  - Main image
+  - Category & brand tags
+
+---
+
+## 🔎 Product Detail
+
+### 📍 Route
+```bash
+/product/{id}
+```
+
+### 📝 Description
+Displays the detail page for a single product.
+
+### 📌 Parameters
+- `id`: The unique identifier of the product document in Convex.
+
+### 📄 Content
+- Title  
+- Full description  
+- Price and Sale Price  
+- Images (main + gallery)  
+- Stock status  
+- SKU  
+- Tags  
+- Related information (category, brand, etc.)
+
+### ⚠️ Errors
+If a product with the provided `id` is not found or inactive (`isActive: false`), display a 404 page or a fallback message.
+
+---
+
+## 🔧 Admin - Edit Product
+
+### 📍 Route
+```bash
+/admin/product
+```
+
+### 📝 Description
+Admin dashboard interface to edit existing products or create new ones.
+
+### 🔐 Access
+This page should be protected, only accessible to authorized users.
+
+### ✏️ Features
+- Create new product
+- Edit existing product fields:
+  - Title, Description
+  - Price, Sale Price
+  - Images (main & gallery)
+  - SKU, Stock
+  - Tags, Category, Brand
+  - Active status
+- Form validation
+- Live preview (optional)
+
+---
+
+## 📌 Schema Reference
+
+Here’s the schema each product follows:
+
+```ts
+{
+  title: string;
+  description: string;
+  price: number;
+  salePrice?: number;
+  stock: number;
+  sku: string;
+  category: string;
+  brand: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  imageUrl: string;
+  images: string[];
+  tags: string[];
+}
+```
+
+---
+
+## 🚀 Deployment Notes
+
+- Product data is stored and fetched via **Convex Cloud**.
+- Make sure your frontend is connected to your Convex project.
