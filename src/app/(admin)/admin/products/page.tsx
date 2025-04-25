@@ -87,67 +87,8 @@ export default function AdminProductList() {
   return (
     <div className="container mx-auto px-4 space-y-4">
       {/* Search and filters */}
-      <div className="flex flex-wrap gap-4">
-        <div className="relative flex-1 min-w-[240px]">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search products by name or SKU..."
-            className="pl-8"
-          />
-        </div>
-        
-        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
-              {categories.map((category) => (
-                <SelectItem key={category} value={category}>
-                  {category}
-                </SelectItem>
-              ))}
-          </SelectContent>
-        </Select>
-        
-        <Select value={brandFilter} onValueChange={setBrandFilter}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Brand" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Brands</SelectItem>
-            {brands.map((brand) => (
-              <SelectItem key={brand} value={brand}>
-                {brand}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        
-        <Select value="Test" onValueChange={(value) => console.log(value)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Status</SelectItem>
-            <SelectItem value="active">Active</SelectItem>
-            <SelectItem value="inactive">Inactive</SelectItem>
-          </SelectContent>
-        </Select>
-{/*         
-        <Select value={stockFilter} onValueChange={setStockFilter}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Stock" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Stock</SelectItem>
-            <SelectItem value="inStock">In Stock</SelectItem>
-            <SelectItem value="outOfStock">Out of Stock</SelectItem>
-          </SelectContent>
-        </Select> */}
-      </div>
+
       
-      {/* Action buttons */}
       <div className="flex justify-end gap-2">      
         <Button onClick={handleAddProduct} >
           <Plus className="h-4 w-4 mr-2" />
@@ -155,7 +96,6 @@ export default function AdminProductList() {
         </Button>
       </div>
       
-      {/* Products table */}
       <Table>
         <TableHeader>
           <TableRow>
@@ -228,30 +168,6 @@ export default function AdminProductList() {
                   <Button variant="outline" size="icon" onClick={() => handleEditProduct(product)}>
                     <Edit className="h-4 w-4" />
                   </Button>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button variant="outline" size="icon">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Delete Product</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          Are you sure you want to delete "{product.title}"? This action cannot be undone.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction 
-                          onClick={() => console.log("Delete product")}
-                          className="bg-red-500 hover:bg-red-600"
-                        >
-                          Delete
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
                 </TableCell>
               </TableRow>
             ))
@@ -259,7 +175,6 @@ export default function AdminProductList() {
         </TableBody>
       </Table>
       
-      {/* Product Dialog for Add/Edit */}
 
       <ProductDialog 
         open={isProductDialogOpen}

@@ -1,7 +1,7 @@
 "use client";
 
 interface ProductGalleryProps {
-  images: string[]; // Nhận danh sách ảnh dưới dạng mảng các URL
+  images: string[];
 }
 
 export const ProductGallery: React.FC<ProductGalleryProps> = ({ images }) => {

@@ -51,13 +51,13 @@ export const ProductDialog: React.FC<ProductDialogProps> = ({
   product,
   onSave,
 }) => {
-  // State for the product form
+
   const [editedProduct, setEditedProduct] = useState<Product>(emptyProduct);
-  // State for tag input
+
   const [tagInput, setTagInput] = useState("");
-  // State for variants
+
   const [showVariants, setShowVariants] = useState(false);
-  // State to track if form is submitted
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
 
@@ -246,6 +246,8 @@ export const ProductDialog: React.FC<ProductDialogProps> = ({
   // Form validation
   const isFormValid = () => {
     return (
+      editedProduct.category.trim() !== "" &&
+      editedProduct.brand.trim() !== "" &&
       editedProduct.title.trim() !== "" &&
       editedProduct.sku.trim() !== "" &&
       editedProduct.price > 0
@@ -289,7 +291,7 @@ export const ProductDialog: React.FC<ProductDialogProps> = ({
         }
         onOpenChange(false);
       } catch (err) {
-        console.error("Lỗi khi lưu sản phẩm:", err);
+        console.error("Error:", err);
       }
     }
   };
@@ -418,7 +420,7 @@ export const ProductDialog: React.FC<ProductDialogProps> = ({
               
               <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category">Category<span className="text-red-500">*</span></Label>
                   <Input
                     id="category"
                     name="category"
@@ -428,7 +430,7 @@ export const ProductDialog: React.FC<ProductDialogProps> = ({
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="brand">Brand</Label>
+                  <Label htmlFor="brand">Brand<span className="text-red-500">*</span></Label>
                   <Input
                     id="brand"
                     name="brand"
